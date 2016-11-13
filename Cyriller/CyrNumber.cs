@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Cyriller.Model;
 
 namespace Cyriller
@@ -104,7 +103,8 @@ namespace Cyriller
             {
                 string[] decimals;
                 long d = long.Parse(parts[1]);
-                long dr = long.Parse(string.Join(string.Empty, parts[1].Reverse().ToArray()));
+                var strings = new[] { new string(parts[1].Reverse().ToArray()) };
+                long dr = long.Parse(string.Join(string.Empty, strings));
 
                 if (dr < 10)
                 {
@@ -170,7 +170,8 @@ namespace Cyriller
                     List<char> chars = v.ToCharArray().ToList();
 
                     chars.Insert(Currency.Decimals, '.');
-                    v = string.Join(string.Empty, chars.ToArray());
+                    var strings = new []{ new string(chars.ToArray()) };
+                    v = string.Join(string.Empty, strings);
                 }
 
                 long d = (long)Math.Round(decimal.Parse(v), 0);

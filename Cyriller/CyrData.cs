@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 
@@ -40,21 +37,13 @@ namespace Cyriller
 
             Dictionary<string, int> keys = new Dictionary<string, int>();
 
-            /*foreach (string s in words.Keys)
+            foreach (string s in Collection)
             {
                 if (s.EndsWith(Word))
                 {
                     keys.Add(s, s.Length);
                 }
-            }*/
-
-            Collection.AsParallel().ForAll(s =>
-            {
-                if (s.EndsWith(Word))
-                {
-                    keys.Add(s, s.Length);
-                }
-            });
+            }
 
             if (!keys.Any() && Word.Length > 2)
             {
