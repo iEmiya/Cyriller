@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 
 namespace Cyriller
 {
@@ -13,7 +14,10 @@ namespace Cyriller
 
         public TextReader GetData(string FileName)
         {
-            Stream stream = typeof(CyrData).Assembly.GetManifestResourceStream("Cyriller.App_Data." + FileName);
+            string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            string resourceName = resourceNames.FirstOrDefault(p => p.EndsWith("Cyriller.App_Data." + FileName));
+
+            Stream stream = typeof(CyrData).Assembly.GetManifestResourceStream(resourceName);
             GZipStream gzip = new GZipStream(stream, CompressionMode.Decompress);
             TextReader treader = new StreamReader(gzip);
 
